@@ -1,0 +1,23 @@
+// FONTS
+@mixin f-reg($fz) {
+	font-family: 'regular', sans-serif;
+	font-size: normal;
+}
+@mixin f-med($fz) {
+	font-family: 'medium', sans-serif;
+	font-size: $fz;
+	font-weight: normal;
+}
+
+
+// BTN
+@mixin btn($w, $h, $fz) {
+	border: none;
+	border-radius: 10rem;
+	width: $w;
+	height: $h;
+
+	@include f-med($fz);
+	background: linear-gradient(120deg, $wv-purple, $wv-blue);
+	color: $white;
+}
