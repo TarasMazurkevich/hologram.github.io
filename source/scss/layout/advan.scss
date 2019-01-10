@@ -1,0 +1,122 @@
+.advan {
+	margin-top: 10rem;
+
+	&__list {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	&__item {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		@media screen and (min-width: 768px) {
+			flex-direction: row;	
+		}
+
+		&:nth-of-type(2n) {
+			@media screen and (min-width: 768px) {
+				flex-direction: row-reverse;
+			}
+		}
+
+		&:not(:first-of-type) {
+			margin-top: 3rem;
+		}
+	}
+
+	&_percent {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		border-radius: 50%;
+		width: 5rem;
+		height: 5rem;
+
+		background-color: #000;
+
+		@media screen and (min-width: 768px) {
+			width: 7rem;
+			height: 7rem;
+		}
+
+		@media screen and (min-width: 1200px) {
+			width: 10rem;
+			height: 10rem;
+		}
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: -.2rem;
+			bottom: -.2rem;
+			left: -.2rem;
+			right: -.2rem;
+			display: block;
+			z-index: -2;
+
+			border-radius: 50%;
+
+		    background: linear-gradient(to bottom, $wv-purple 0%, $wv-blue 80%, $wv-green 100%);
+		}
+
+		p {
+			display: flex;
+			align-items: flex-start;
+			
+			background: linear-gradient(to bottom, $wv-purple 0%, $wv-blue 80%, $wv-green 100%);
+			background-clip: text;
+			-webkit-background-clip: text;
+			color: transparent;
+
+			@include f-reg(1.8rem);
+
+			@media screen and (min-width: 768px) {
+				font-size: 2.4rem;
+			}
+
+			@media screen and (min-width: 1200px) {
+				font-size: 3.2rem;
+			}
+		}
+
+		span {
+			margin-top: .15rem;
+
+			@include f-reg(1rem);
+			font-weight: bold;
+
+			@media screen and (min-width: 768px) {
+				font-size: 1.4rem;
+			}
+
+			@media screen and (min-width: 1200px) {
+				font-size: 1.8rem;
+			}
+		}
+	}
+
+	&_text {
+		margin-top: 2rem;
+		padding: {
+			right: 5%;
+			left: 5%;
+		}
+		max-width: 25rem;
+
+		@include f-reg(1rem);
+		text-align: center;
+
+		@media screen and (min-width: 768px) {
+			margin-top: 0;
+
+			text-align: left;
+			font-size: 1.3rem;
+		}
+	}
+}
