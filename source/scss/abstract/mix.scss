@@ -1,6 +1,7 @@
 // FONTS
 @mixin f-reg($fz) {
 	font-family: 'regular', sans-serif;
+	font-size: $fz;
 	font-size: normal;
 }
 @mixin f-med($fz) {
