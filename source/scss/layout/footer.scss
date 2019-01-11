@@ -1,0 +1,25 @@
+.footer {
+	overflow: hidden;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	margin-top: 7rem;
+	padding: {
+		right: 5%;
+		left: 5%;
+	}
+	height: 10rem;
+
+	&_cop {
+		@include f-reg(1rem);
+		z-index: 2;
+	}
+
+	&_img  {
+		@extend .top_img;
+		left: -10%;
+		z-index: 1;
+	}
+}
