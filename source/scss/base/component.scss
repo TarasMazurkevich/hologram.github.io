@@ -66,6 +66,13 @@
 	}
 
 	&_item {
+		&:hover a {
+			background: linear-gradient(to bottom right, $wv-purple, $wv-blue);
+			background-clip: text;
+			-webkit-background-clip: text;
+			color: transparent;
+		}
+
 		&:not(:first-of-type) {
 			margin-top: 1.5rem;
 

@@ -18,6 +18,7 @@
 
 .wrap {
   overflow: hidden;
+  position: relative;
 }
 
 * {
@@ -49,7 +50,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 body {
   font-family: 'medium', sans-serif;
   line-height: 1;
-  background: linear-gradient(to right, #1A1A1A 5%, #000 95%);
+  background: linear-gradient(to right, #202020 5%, #000 95%);
   color: $white;
 }
 
