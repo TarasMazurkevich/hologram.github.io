@@ -1,6 +1,10 @@
 .advan {
 	margin-top: 10rem;
 
+	@media screen and (min-width: 1200px) {
+		margin-top: 20rem;
+	}
+
 	&__list {
 		display: flex;
 		flex-direction: column;
@@ -20,6 +24,21 @@
 		&:nth-of-type(2n) {
 			@media screen and (min-width: 768px) {
 				flex-direction: row-reverse;
+			}
+
+			& > p {
+				@media screen and (min-width: 1200px) {
+					margin-left: 0;
+					margin-right: 4rem;
+				}
+			}
+		}
+
+		&:nth-of-type(2n-1) {
+			div {
+				@media screen and (min-width: 1200px) {
+					background-color: #161616;
+				}
 			}
 		}
 
@@ -46,8 +65,8 @@
 		}
 
 		@media screen and (min-width: 1200px) {
-			width: 10rem;
-			height: 10rem;
+			width: 15rem;
+			height: 15rem;
 		}
 
 		&::before {
@@ -81,7 +100,7 @@
 			}
 
 			@media screen and (min-width: 1200px) {
-				font-size: 3.2rem;
+				font-size: 3.5rem;
 			}
 		}
 
@@ -96,7 +115,7 @@
 			}
 
 			@media screen and (min-width: 1200px) {
-				font-size: 1.8rem;
+				font-size: 2rem;
 			}
 		}
 	}
@@ -117,6 +136,11 @@
 
 			text-align: left;
 			font-size: 1.3rem;
+		}
+
+		@media screen and (min-width: 1200px) {
+			margin-left: 3rem;
+			line-height: 1.7;
 		}
 	}
 }

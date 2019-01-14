@@ -20,5 +20,14 @@
 
 	@include f-med($fz);
 	background: linear-gradient(120deg, $wv-purple, $wv-blue);
+	background-size: 150% 150%;
 	color: $white;
+
+	transition: all .5s;
+	cursor: pointer;
+
+	&:hover {
+		transform: scale(1.05, 1.05) translate(.2rem, .2rem);
+		background-position: 100% 10%;
+	}
 }

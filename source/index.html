@@ -95,8 +95,8 @@
                         </g>
                     </svg>
                     <ul class="nav__list">
-                        <li class="nav_item "><a href="#">главная</a></li>
-                        <li class="nav_item active"><a href="#">описание</a></li>
+                        <li class="nav_item active"><a href="#">главная</a></li>
+                        <li class="nav_item"><a href="#">описание</a></li>
                         <li class="nav_item"><a href="#">продукт</a></li>
                         <li class="nav_item"><a href="#">преимущества</a></li>
                         <li class="nav_item"><a href="#">контакты</a></li>
@@ -133,11 +133,11 @@
                     <h2 class="desc_title">Что здесь происходит?</h2>
                 </header>
                 <article class="desc__article">
-                    <a href="#" class="desc_video" data-lity>iFrame Youtube</a>
-                    <div class="desc__bottom">
+                    <div class="desc__top">
+                        <a href="#" class="desc_video" data-lity>iFrame Youtube</a>
                         <p class="desc_text">Хотите в разы увеличить продажи и привлекать внимание покупателей уникальной рекламы? Для вас есть готовое решение – 3D вентилятор, создающий голограмму вашего товара прямо в воздухе!</p>
-                        <p class="desc_text">Совсем недавно голографическая реклама была уделом фантастических фильмов и книг, но время не стоит на месте и мы рады представить вам  необычную рекламу нового поколения.</p>
                     </div>
+                    <p class="desc_text">Совсем недавно голографическая реклама была уделом фантастических фильмов и книг, но время не стоит на месте и мы рады представить вам  необычную рекламу нового поколения.</p>
                 </article>
             </div>
         </section>
@@ -147,7 +147,7 @@
         <section class="product">
             <ul class="product__list">
                 <li class="product_item">
-                    <p class="product_name">Голографический вентилятор 42см</p>
+                    <p class="product_name">Голограма 42см</p>
                     <div class="product__desc">
                         <img src="img/png/holo42.png" alt="" class="product_img">
                         <p class="product_text">
@@ -324,14 +324,90 @@
                 <div class="footer_img"></div>
                 <div class="footer_img"></div>
             </div>
-        </footer>
 
+        </footer>
+        <canvas id="canvas"></canvas>
     </div>
 
 
     
     
     <!-- map -->
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+    <script>
+        (function () {
+  var canvas = $('canvas')[0];
+  var ctx = canvas.getContext('2d');
+  var width = canvas.width = window.innerWidth;
+  var height = canvas.height = Math.max(
+  document.body.scrollHeight, document.documentElement.scrollHeight,
+  document.body.offsetHeight, document.documentElement.offsetHeight,
+  document.body.clientHeight, document.documentElement.clientHeight
+);
+  var particleCount = 100;
+  var particles = [];
+  
+  function init() {
+    for (var i = 0; i < particleCount; i++) {
+      createParticle();
+    }
+  }
+  
+  function createParticle() {
+    var newParticle = new Particle();
+    newParticle.initialize();
+    particles.push(newParticle);
+  }
+  
+  function Particle() {
+    this.initialize = function() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height + height;
+      this.v = 5 + Math.random() * 5;
+      this.s = 5 + Math.random() * 5;
+    }
+    
+    this.update = function () {
+      this.x += Math.sin(this.s);
+      this.s -= 0.1;
+      this.y -= this.v * 0.5;
+      if (this.isOutOfBounds()) {
+        this.initialize();
+      }
+    }
+    
+    this.draw = function () {
+      ctx.fillRect(this.x, this.y, 6, 6);
+      ctx.fillStyle = "#FFF";
+      ctx.fill();
+    }
+    
+    this.isOutOfBounds = function () {
+      return ((this.x < 0) || (this.x > width) || (this.y < 0) || (this.y > height));
+    }
+  }
+  
+  function render() {
+    ctx.clearRect(0, 0, width, height);
+    for (var i = 0; i < particles.length; i++) {
+      particles[i].update();
+      particles[i].draw();
+    }
+    requestAnimationFrame(render);
+  }
 
+  window.addEventListener('resize', resize);
+  function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+  
+  init();
+  render();
+})();
+    </script>
 </body>
 </html>
