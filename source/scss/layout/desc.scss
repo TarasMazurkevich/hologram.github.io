@@ -2,10 +2,15 @@
 	position: relative;
 	margin-top: 15rem;
 	padding: {
-		top: 10rem;
-		bottom: 10rem;
 		left: 10%;
 		right: 10%;
+	}
+
+	@media screen and (min-width: 768px) {
+		padding: {
+			top: 10rem;
+			bottom: 10rem;
+		}
 	}
 
 	&__wrap {
