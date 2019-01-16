@@ -206,13 +206,13 @@ blockSlider.ontouchstart = function (e) {
 				let swipeEnd = ev.changedTouches[0].clientX;
 				console.log(swipeEnd);
 				if(-(elemWidth * (elemCount - 1)) < -target.style.transform.replace(/\D+/g,"")) {
-					if(swipeStart > swipeEnd) {
+					if(swipeStart > swipeEnd && swipeStart - swipeEnd > 100) {
 						console.log(target);
 						target.style.transform = `translateX(-${scroll += elemWidth}px)`;
 					}
 				}
 				
-				if(swipeStart < swipeEnd) {
+				if(swipeStart < swipeEnd && swipeStart - swipeEnd < -100) {
 					console.log(target);
 					target.style.transform = `translateX(-${scroll -= elemWidth}px)`;
 				}
