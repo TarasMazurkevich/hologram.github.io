@@ -29,14 +29,44 @@
 		display: flex;
 		align-items: center;
 
+		animation-name: toBottom;
+		animation-duration: 2s;
+		animation-fill-mode: forwards;
+
 		span {
-			display: inline-block;
+			position: relative;
+			display: flex;
+			justify-content: center;
+			align-items: center;
 
 			border-radius: 100%;
 			width: 2.5rem;
 			height: 2.5rem;
 
 			background: linear-gradient(to bottom right, $wv-purple, $wv-blue);
+
+			&::before {
+				position: absolute;
+				content: '';
+				display: block;
+				border-radius: 100%;
+				width: .6rem;
+				height: .6rem;
+				background-color: #000;
+				z-index: 1;
+			}
+
+			&::after {
+				position: absolute;
+				content: '';
+				display: block;
+				border-radius: 1rem;
+				width: 95%;
+				height: .25rem;
+				background-color: #000;
+				transform: rotate(-45deg);
+				z-index: 0;
+			}
 		}
 
 		h1 {
@@ -120,9 +150,25 @@
 
 	// TOP__BTN
 	&_btn {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
 		margin-top: 5rem;
+		padding: {
+			right: 2%;
+			left: 2%;
+		}
+		
 		@include btn(65%, 3rem, 1rem);
+		text-align: center;
+		text-decoration: none;
 		cursor: pointer;
+
+		animation-name: toRight;
+		animation-duration: 2s;
+		animation-fill-mode: forwards;
+
 
 		@media screen and (min-width: 768px) {
 			width: 80%;

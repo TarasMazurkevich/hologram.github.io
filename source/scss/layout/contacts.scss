@@ -41,8 +41,8 @@
 		height: 12rem;
 
 		@media screen and (min-width: 1200px) {
-			width: 15rem;
-			height: 15rem;
+			width: 17rem;
+			height: 17rem;
 		}
 
 		img {
@@ -55,6 +55,10 @@
 		margin-top: 1rem;
 
 		@include f-med(1.5rem);
+
+		@media screen and (min-width: 1200px) {
+			font-size: 1.8rem;
+		}
 	}
 
 	&_phone {
@@ -67,6 +71,11 @@
 		@include btn(13rem, 3rem, 1.2rem);
 
 		text-decoration: none;
+
+		@media screen and (min-width: 1200px) {
+			width: 16rem;
+			font-size: 1.5rem;
+		}
 	}
 }
 

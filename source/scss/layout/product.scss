@@ -13,7 +13,7 @@
 	&__list {
 		display: flex;
 
-		padding-left: 235vw;
+		padding-left: 225vw;
 		width: 999rem;
 
 		@media screen and (min-width: 768px) {
@@ -155,8 +155,182 @@
 	}
 }
 
-#canvas {
-	position: absolute;
-	bottom: 0;
-	z-index: -1;
+.buy {
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	width: 100vw;
+	height: 100vh;
+
+	background-color: rgba(0,0,0, .9);
+	z-index: 100000;
+
+	&__header {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		padding: {
+			right: 5%;
+			left: 5%;
+		}
+		width: 100%;
+
+		@media screen and (min-width: 768px) {
+			align-items: center;
+		}
+	}
+
+	&_close {
+		svg{
+			width: 1.5rem;
+			height: 1.5rem;
+			fill: $white;
+			cursor: pointer;
+		}
+	}
+
+	&_title {
+		@extend .nav_item.active;
+
+		margin-top: 1rem;
+
+		@include f-reg(1.5rem);
+		text-transform: uppercase;
+
+		&::after {
+			height: .2rem;
+		}
+	}
+
+	&__article {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+
+		margin-top: 3rem;
+		padding: {
+			right: 2%;
+			left: 2%;
+		}
+
+		@media screen and (min-width: 768px) {
+			flex-direction: row;
+			margin-top: 3rem;
+		}
+	}
+
+	&_img {
+		width: 10rem;
+		height: 10rem;
+
+		@media screen and (min-width: 768px) {
+			width: 15rem;
+			height: 12rem;
+		}
+	}
+
+	&__desc {
+		@media screen and (min-width: 768px) {
+			margin-left: 5rem;
+		}
+
+		div {
+			margin-top: 1rem;
+			text-align: right;
+			
+			&:not(:first-of-type) {
+				@media screen and (min-width: 768px) {
+					margin-top: 2rem;
+				}
+			}
+
+			@media screen and (min-width: 768px) {
+				@include f-reg(1.3rem);
+			}
+		}
+
+		span {
+			display: block;
+			margin-bottom: .5rem;
+		}
+	}
+
+	&__form {
+		display: flex;
+		flex-direction: column;
+		margin-top: 3rem;
+		
+		@media screen and (min-width: 768px) {
+			align-items: flex-start;
+			margin-top: 3rem;
+		}
+	}
+
+	&__block {
+		@media screen and (min-width: 768px) {
+			width: 100%;
+		}
+	}
+
+	&__row {
+		display: flex;
+		flex-direction: column;
+
+		@media screen and (min-width: 768px) {
+			@include f-reg(1.3rem);
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			width: 100%;
+		}
+
+		&:not(:first-of-type) {
+			margin-top: 1rem;
+			@media screen and (min-width: 768px) {
+				margin-top: 2rem;
+			}
+		}
+
+		input {
+			border:none;
+			background: none;
+			outline: none;
+			padding: 0;
+
+			margin-top: .2rem;
+			border-bottom: {
+				width: .2rem;
+				style: solid;
+			}
+			border-image: linear-gradient(to right, rgb(186, 0, 255) 0%, rgb(0, 196, 255) 80%, rgb(0, 255, 196) 100%);
+			border-image-slice: 1;
+
+			color: $white;
+
+			@media screen and (min-width: 768px) {
+				margin-left: 1rem;
+				width: 18rem;
+			}
+			@media screen and (min-width: 1200px) {
+				font-size: 1.2rem;
+			}
+		}
+	}
+
+	&_submit {
+		@include btn(100%, auto, 1.5rem);
+		margin-top: 1rem;
+
+		@media screen and (min-width: 768px) {
+			align-self: flex-end;
+			margin-top: 3rem;
+			width: 15rem;
+		}
+	}
 }
