@@ -19,7 +19,8 @@ const reload = browserSync.reload;
 
 
 let path = {
-    build: { 
+    build: {
+        file: './build/',
         html: './build/',
         js: './build/js/',
         style: './build/css/',
@@ -27,13 +28,15 @@ let path = {
         fonts: './build/fonts/'
     },
     src: { 
+        file: './source/.htaccess',
         html: './source/index.html',
         js: './source/js/**/*.js',
         style: './source/scss/main.scss',
         img: './source/img/**/*.*', 
         fonts: './source/fonts/**/*.*'
     },
-    watch: { 
+    watch: {
+        file: './source/.htaccess',
         html: './source/index.html',
         js: './source/js/**/*.js',
         style: './source/scss/**/*.scss',
@@ -42,6 +45,13 @@ let path = {
     },
     clean: './build'
 };
+
+/* ------------ file build ------------- */
+gulp.task('file:build', function() {
+    return gulp.src(path.src.file)
+        .pipe(gulp.dest(path.build.file))
+        .pipe(reload({stream: true}));
+});
 
 
 /* ------------ html build ------------- */
@@ -105,6 +115,7 @@ gulp.task('fonts:build', function() {
 
 /* ------------ Watchers ------------- */
 gulp.task('watch', function() {
+    gulp.watch(path.watch.file, gulp.series('file:build'));
     gulp.watch(path.watch.html, gulp.series('html:build'));
     gulp.watch(path.watch.style, gulp.series('style:build'));
     gulp.watch(path.watch.js, gulp.series('js:build'));
@@ -133,7 +144,7 @@ gulp.task('clean', function (cb) {
 /* ------------ Start ------------- */
 gulp.task('default', gulp.series(
         'clean', 
-        gulp.parallel('html:build', 'style:build', 'js:build', 'image:build', 'fonts:build'),
+        gulp.parallel('html:build', 'style:build', 'js:build', 'image:build', 'fonts:build', 'file:build'),
         gulp.parallel('watch', 'browser-sync')
     )
 );
