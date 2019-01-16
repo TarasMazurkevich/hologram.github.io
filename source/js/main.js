@@ -1,3 +1,7 @@
+;(function () {
+	
+'use strict';
+
 // 1) Burger menu  		-----------------------------------------------
 // 2) Anchores 			-----------------------------------------------
 // 3) Animate cube  	-----------------------------------------------
@@ -10,10 +14,10 @@
 
 // 1)
 // Burger menu START
-const header = document.querySelector('.top__header');
+let headers = document.querySelector('.top__header');
 const nav = document.querySelector('.nav');
 
-header.addEventListener('click', function (e) {
+headers.addEventListener('click', function (e) {
 	let target = e.target;
 	while(this) {
 		if(target.classList.contains('burger')) {
@@ -64,109 +68,80 @@ for (let anchor of anchors) {
 // 3)
 // Animate cube START
 let canvas = document.querySelector('canvas');
-let ctx = canvas.getContext('2d');
 
-let width = canvas.width = window.innerWidth;
-let height = canvas.height = Math.max(
-	document.body.scrollHeight, document.documentElement.scrollHeight,
-	document.body.offsetHeight, document.documentElement.offsetHeight,
-	document.body.clientHeight, document.documentElement.clientHeight
-);
+if(canvas.style.display === 'block') {
+	let ctx = canvas.getContext('2d');
 
-let particleCount = 100;
-let particles = [];
+	let width = canvas.width = window.innerWidth;
+	let height = canvas.height = Math.max(
+		document.body.scrollHeight, document.documentElement.scrollHeight,
+		document.body.offsetHeight, document.documentElement.offsetHeight,
+		document.body.clientHeight, document.documentElement.clientHeight
+	);
 
-function init() {
-	for (let i = 0; i < particleCount; i++) {
-	  createParticle();
+	let particleCount = 100;
+	let particles = [];
+
+	function init() {
+		for (let i = 0; i < particleCount; i++) {
+		  createParticle();
+		}
 	}
+
+	function createParticle() {
+		let newParticle = new Particle();
+		newParticle.initialize();
+		particles.push(newParticle);
+	}
+
+	function Particle() {
+		this.initialize = function() {
+		  this.x = Math.random() * width;
+		  this.y = Math.random() * height + height;
+		  this.v = 5 + Math.random() * 5;
+		  this.s = 5 + Math.random() * 5;
+		}
+
+		this.update = function () {
+		  this.x += Math.sin(this.s);
+		  this.s -= 0.1;
+		  this.y -= this.v * 0.5;
+		  if (this.isOutOfBounds()) {
+		    this.initialize();
+		  }
+		}
+
+		this.draw = function () {
+		  ctx.fillRect(this.x, this.y, 6, 6);
+		  ctx.fillStyle = "#FFF";
+		  ctx.fill();
+		}
+
+		this.isOutOfBounds = function () {
+		  return ((this.x < 0) || (this.x > width) || (this.y < 0) || (this.y > height));
+		}
+	}
+
+	function render() {
+		ctx.clearRect(0, 0, width, height);
+		for (let i = 0; i < particles.length; i++) {
+		  particles[i].update();
+		  particles[i].draw();
+		}
+		requestAnimationFrame(render);
+	}
+
+	window.addEventListener('resize', resize);
+
+	function resize() {
+		width = canvas.width = window.innerWidth;
+		height = canvas.height = window.innerHeight;
+	}
+
+	init();
+	render();
 }
-
-function createParticle() {
-	let newParticle = new Particle();
-	newParticle.initialize();
-	particles.push(newParticle);
-}
-
-function Particle() {
-	this.initialize = function() {
-	  this.x = Math.random() * width;
-	  this.y = Math.random() * height + height;
-	  this.v = 5 + Math.random() * 5;
-	  this.s = 5 + Math.random() * 5;
-	}
-
-	this.update = function () {
-	  this.x += Math.sin(this.s);
-	  this.s -= 0.1;
-	  this.y -= this.v * 0.5;
-	  if (this.isOutOfBounds()) {
-	    this.initialize();
-	  }
-	}
-
-	this.draw = function () {
-	  ctx.fillRect(this.x, this.y, 6, 6);
-	  ctx.fillStyle = "#FFF";
-	  ctx.fill();
-	}
-
-	this.isOutOfBounds = function () {
-	  return ((this.x < 0) || (this.x > width) || (this.y < 0) || (this.y > height));
-	}
-}
-
-function render() {
-	ctx.clearRect(0, 0, width, height);
-	for (let i = 0; i < particles.length; i++) {
-	  particles[i].update();
-	  particles[i].draw();
-	}
-	requestAnimationFrame(render);
-}
-
-window.addEventListener('resize', resize);
-
-function resize() {
-	width = canvas.width = window.innerWidth;
-	height = canvas.height = window.innerHeight;
-}
-
-init();
-render();
 // Animate cube END
-
-// --------------------------------------------------------------
-
-// 4)
-// Counter START
-/*var clearFunc = 1;
-$(window).on('scroll', function(){
-	$('#counter').each(function(){
-		var ePosition = $(this).offset().top,
-			topWindow = $(window).scrollTop();
-		if(ePosition < topWindow + 400){
-			if(clearFunc < 2){
-				$('.count').each(function(){
-					var i = 1,
-						that = $(this),
-						num = that.data('num');
-					var int = setInterval(function(){
-						if(i <= num){
-							that.html(`${i}<span>%</span>`);
-						} else {
-							clearFunc = clearFunc + 2;
-							clearInterval(int);
-						};
-
-						i += 1;
-					}, 1000);
-				});
-			};
-		};
-	});
-});*/
-// Counter END
 
 // --------------------------------------------------------------
 
@@ -200,21 +175,17 @@ blockSlider.ontouchstart = function (e) {
 	while(true) {
 		if(target.tagName === 'UL') {
 			let swipeStart = e.changedTouches[0].clientX;
-			console.log(swipeStart);
 
 			blockSlider.ontouchend = function(ev) {
 				let swipeEnd = ev.changedTouches[0].clientX;
-				console.log(swipeEnd);
 				if(-(elemWidth * (elemCount - 1)) < -target.style.transform.replace(/\D+/g,"")) {
 					if(swipeStart > swipeEnd && swipeStart - swipeEnd > 100) {
-						console.log(target);
-						target.style.transform = `translateX(-${scroll += elemWidth}px)`;
+						target.style.transform = `translateX(-${scroll += elemWidth + 20}px)`;
 					}
 				}
 				
 				if(swipeStart < swipeEnd && swipeStart - swipeEnd < -100) {
-					console.log(target);
-					target.style.transform = `translateX(-${scroll -= elemWidth}px)`;
+					target.style.transform = `translateX(-${scroll -= elemWidth + 20}px)`;
 				}
 			}
 			return;
@@ -222,60 +193,6 @@ blockSlider.ontouchstart = function (e) {
 			target = target.parentNode;
 		}
 	}
-
-	/*while(this) {
-		if(target.tagName === 'UL') {
-			let swipeStart = e.changedTouches[0].clientX;
-
-			blockSlider.ontouchmove = function (e) {
-				moveAt(e, swipeStart);
-			};
-
-			blockSlider.ontouchend = function() {
-				blockSlider.ontouchmove = null;
-				blockSlider.ontouchup = null;
-			}
-			return;
-		} else {
-			target = target.parentNode;
-		}
-	}
-	
-	
-
-	function moveAt(e, swipeStart) {
-		let target = e.target;
-		let swipeMove = e.changedTouches[0].clientX;
-
-		while(true) {
-			if(target.tagName === 'UL') 
-				break;
-			else
-				target = target.parentNode;
-			
-		}
-
-		if(-(elemWidth * (elemCount - 1)) < -target.style.transform.replace(/\D+/g,"")) {
-			if(e.changedTouches[0].clientX < swipeStart) {
-				if(e.changedTouches[0].clientX > swipeMove) 
-					target.style.transform = `translateX(-${scroll -= 15}px)`;
-				else if(e.changedTouches[0].clientX < swipeMove) 
-					target.style.transform = `translateX(-${scroll += 15}px)`;
-				else 
-					target.style.transform = `translateX(-${scroll += 15}px)`;
-			}
-		}
-
-		if(e.changedTouches[0].clientX > swipeStart) {
-			if(e.changedTouches[0].clientX > swipeMove) 
-				target.style.transform = `translateX(-${scroll -= 15}px)`;
-			else if(e.changedTouches[0].clientX < swipeMove) 
-				target.style.transform = `translateX(-${scroll += 15}px)`;
-			else 
-				target.style.transform = `translateX(-${scroll -= 15}px)`;
-		}
-		
-	}*/
 
 };
 // Slider END
@@ -401,3 +318,5 @@ $('.desc').on('mousemove', function(e){
 	});
 });
 // Parallax effect END
+
+})();

@@ -88,17 +88,20 @@
 			display: flex;
 			align-items: flex-start;
 			
+			background: -webkit-linear-gradient(to bottom, $wv-purple 0%, $wv-blue 80%, $wv-green 100%);
+			background: -o-linear-gradient(to bottom, $wv-purple 0%, $wv-blue 80%, $wv-green 100%);
 			background: linear-gradient(to bottom, $wv-purple 0%, $wv-blue 80%, $wv-green 100%);
 			background-clip: text;
 			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
 			color: transparent;
-
+		
 			@include f-reg(1.8rem);
-
+		
 			@media screen and (min-width: 768px) {
 				font-size: 2.4rem;
 			}
-
+		
 			@media screen and (min-width: 1200px) {
 				font-size: 3.5rem;
 			}

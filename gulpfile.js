@@ -7,6 +7,7 @@ const htmlminify = require("gulp-html-minify");
 const cssmin = require('gulp-minify-css');
 const prefixer = require('gulp-autoprefixer');
 const sass = require('gulp-sass');
+const babel = require('gulp-babel');
 const uglify = require('gulp-uglify');
 const sourcemaps = require('gulp-sourcemaps');
 const rigger = require('gulp-rigger');
@@ -46,7 +47,7 @@ let path = {
 /* ------------ html build ------------- */
 gulp.task('html:build', function() {
 	return gulp.src(path.src.html)
-        // .pipe(htmlminify())
+        .pipe(htmlminify())
 		.pipe(gulp.dest(path.build.html))
         .pipe(reload({stream: true}));
 });
@@ -57,7 +58,10 @@ gulp.task('js:build', function() {
     return gulp.src(path.src.js)
         .pipe(rigger())
         .pipe(sourcemaps.init())
-        // .pipe(uglify())
+        .pipe(babel({
+            presets: ['@babel/env']
+        }))
+        .pipe(uglify())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(path.build.js))
         .pipe(reload({stream: true}));
@@ -70,7 +74,7 @@ gulp.task('style:build', function() {
         .pipe(sourcemaps.init()) 
         .pipe(sass()) 
         .pipe(prefixer()) 
-        // .pipe(cssmin())
+        .pipe(cssmin())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(path.build.style))
         .pipe(reload({stream: true}));
