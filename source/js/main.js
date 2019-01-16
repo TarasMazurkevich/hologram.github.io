@@ -1,10 +1,11 @@
-// 1) Burger menu  	-----------------------------------------------
-// 2) Anchores 		-----------------------------------------------
-// 3) Animate cube  -----------------------------------------------
-// 4) Counter 		-----------------------------------------------
-// 5) Animate holo	-----------------------------------------------
-// 6) Slider		-----------------------------------------------
-// 7) Product Buy	-----------------------------------------------
+// 1) Burger menu  		-----------------------------------------------
+// 2) Anchores 			-----------------------------------------------
+// 3) Animate cube  	-----------------------------------------------
+// 4) Counter 			-----------------------------------------------
+// 5) Animate holo		-----------------------------------------------
+// 6) Slider			-----------------------------------------------
+// 7) Product Buy		-----------------------------------------------
+// 8) Parallax effect 	-----------------------------------------------
 
 
 // 1)
@@ -196,7 +197,33 @@ let scroll = 1;
 blockSlider.ontouchstart = function (e) {
 	let target = e.target;
 
-	while(this) {
+	while(true) {
+		if(target.tagName === 'UL') {
+			let swipeStart = e.changedTouches[0].clientX;
+			console.log(swipeStart);
+
+			blockSlider.ontouchend = function(ev) {
+				let swipeEnd = ev.changedTouches[0].clientX;
+				console.log(swipeEnd);
+				if(-(elemWidth * (elemCount - 1)) < -target.style.transform.replace(/\D+/g,"")) {
+					if(swipeStart > swipeEnd) {
+						console.log(target);
+						target.style.transform = `translateX(-${scroll += elemWidth}px)`;
+					}
+				}
+				
+				if(swipeStart < swipeEnd) {
+					console.log(target);
+					target.style.transform = `translateX(-${scroll -= elemWidth}px)`;
+				}
+			}
+			return;
+		} else {
+			target = target.parentNode;
+		}
+	}
+
+	/*while(this) {
 		if(target.tagName === 'UL') {
 			let swipeStart = e.changedTouches[0].clientX;
 
@@ -248,7 +275,7 @@ blockSlider.ontouchstart = function (e) {
 				target.style.transform = `translateX(-${scroll -= 15}px)`;
 		}
 		
-	}
+	}*/
 
 };
 // Slider END
