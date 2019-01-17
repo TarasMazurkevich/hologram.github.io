@@ -67,7 +67,9 @@ for (let anchor of anchors) {
 
 // 3)
 // Animate cube START
-let canvas = document.querySelector('canvas');
+let canvas = document.querySelector('#canvas');
+
+console.dir(canvas);
 
 if(canvas.style.display === 'block') {
 	let ctx = canvas.getContext('2d');

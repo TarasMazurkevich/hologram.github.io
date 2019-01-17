@@ -119,11 +119,14 @@
 		}
 
 		span {
+
+			line-height: 1.5;
+			
 			&:not(:first-of-type) {
 				margin-top: .5rem;
 
 				@media screen and (min-width: 1200px) {
-					margin-top: 1rem;
+					margin-top: .5rem;
 				}
 			}
 		}
@@ -141,7 +144,7 @@
 		width: 200%;
 		height: 150%;
 
-		background-image: url('../img/png/wave3.png');
+		background-image: url('../img/wave/wave3.png');
 		background-size: 100% 100%;
 		background-repeat: no-repeat;
 
