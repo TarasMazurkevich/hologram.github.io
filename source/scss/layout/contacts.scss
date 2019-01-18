@@ -92,11 +92,44 @@
 	&_item {
 		&:not(:first-of-type) {
 			margin-left: 1rem;
+
+			@media screen and (min-width: 1200px) {
+				margin-left: 3rem;
+			}
+		}
+
+		a {
+			position: relative;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			border-radius: 50%;
+			padding: 1rem;
+			width: 4rem;
+			height: 4rem;
+
+			background-color: #151515;
+
+			&::before {
+				content: '';
+				position: absolute;
+				top: -.2rem;
+				bottom: -.2rem;
+				left: -.2rem;
+				right: -.2rem;
+				display: block;
+				z-index: -2;
+
+				border-radius: 50%;
+
+			    background: linear-gradient(to bottom, $wv-purple 0%, $wv-blue 80%, $wv-green 100%);
+			}
 		}
 
 		svg {
-			width: 3rem;
-			height: 3rem;
+			width: 100%;
+			height: 100%;
 			fill: url(#gradient);
 			cursor: pointer;
 		}

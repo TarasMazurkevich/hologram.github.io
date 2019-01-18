@@ -216,7 +216,7 @@ product.onclick = function (e) {
 			let block = target.parentNode.parentNode;
 			let data = {
 				src: block.querySelector('.product_img').src,
-				name: block.querySelector('.product_name').innerHTML,
+				title: block.querySelector('.product_name').innerHTML,
 				price: target.innerHTML
 			}
 
@@ -228,7 +228,7 @@ product.onclick = function (e) {
 		}
 	}
 
-	function open({src, name, price}) {
+	function open({src, title, price}) {
 		let template = document.createElement('div');
 		template.classList.add('buy');
 		template.innerHTML = `
@@ -249,7 +249,7 @@ product.onclick = function (e) {
                 <img class="buy_img" src="${src}" alt="">
                 <div class="buy__desc">
                     <div>
-                        <p><span>Товар:</span>${name}</p>
+                        <p><span>Товар:</span>${title}</p>
                     </div>
                     <div >
                         <p><span>Цена:</span>${price}</p>
@@ -260,15 +260,15 @@ product.onclick = function (e) {
                 <div class="buy__block">
                     <div class="buy__row">
                         <label for="name">Имя и Фамилия:</label>
-                        <input type="text" id="name">
+                        <input type="text" name="name" id="name">
                     </div>
                     <div class="buy__row">
                         <label for="phone">Контактный номер:</label>
-                        <input type="phone" id="phone">
+                        <input type="phone" name="phone" id="phone">
                     </div>
                     <div class="buy__row">
                         <label for="email">Электронная почта:</label>
-                        <input type="email" id="email">
+                        <input type="email" name="email" id="email">
                     </div>
                 </div>
                 <input class="buy_submit" name="sub" type="submit" value="Купить">
@@ -284,7 +284,7 @@ product.onclick = function (e) {
 		form.onsubmit = function (e) {
 			e.preventDefault();
 			let formData = new FormData(form);
-			formData.append('name', name);
+			formData.append('title', title);
 			formData.append('price', price);
 
 			fetch('./php/mail.php', {

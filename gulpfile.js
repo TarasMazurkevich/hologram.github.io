@@ -22,6 +22,7 @@ let path = {
     build: {
         file: './build/',
         html: './build/',
+        php: './build/php/',
         js: './build/js/',
         style: './build/css/',
         img: './build/img/',
@@ -30,6 +31,7 @@ let path = {
     src: { 
         file: './source/.htaccess',
         html: './source/index.html',
+        php: './source/php/*.php',
         js: './source/js/**/*.js',
         style: './source/scss/main.scss',
         img: './source/img/**/*.*', 
@@ -38,6 +40,7 @@ let path = {
     watch: {
         file: './source/.htaccess',
         html: './source/index.html',
+        php: './source/php/*.php',
         js: './source/js/**/*.js',
         style: './source/scss/**/*.scss',
         img: './source/img/**/*.*',
@@ -59,6 +62,14 @@ gulp.task('html:build', function() {
 	return gulp.src(path.src.html)
         .pipe(htmlminify())
 		.pipe(gulp.dest(path.build.html))
+        .pipe(reload({stream: true}));
+});
+
+
+/* ------------ php build ------------- */
+gulp.task('php:build', function() {
+    return gulp.src(path.src.php)
+        .pipe(gulp.dest(path.build.php))
         .pipe(reload({stream: true}));
 });
 
@@ -117,6 +128,7 @@ gulp.task('fonts:build', function() {
 gulp.task('watch', function() {
     gulp.watch(path.watch.file, gulp.series('file:build'));
     gulp.watch(path.watch.html, gulp.series('html:build'));
+    gulp.watch(path.watch.php, gulp.series('php:build'));
     gulp.watch(path.watch.style, gulp.series('style:build'));
     gulp.watch(path.watch.js, gulp.series('js:build'));
     gulp.watch(path.watch.img, gulp.series('image:build'));
@@ -128,9 +140,9 @@ gulp.task('watch', function() {
 gulp.task('browser-sync', function(){
     browserSync.init({
         server: {
-            port: 3000,
-            baseDir: "./build"
-        }
+            baseDir: "./build/"
+        },
+        notify: false
     });
 })
 
@@ -144,7 +156,7 @@ gulp.task('clean', function (cb) {
 /* ------------ Start ------------- */
 gulp.task('default', gulp.series(
         'clean', 
-        gulp.parallel('html:build', 'style:build', 'js:build', 'image:build', 'fonts:build', 'file:build'),
+        gulp.parallel('html:build', 'php:build', 'style:build', 'js:build', 'image:build', 'fonts:build', 'file:build'),
         gulp.parallel('watch', 'browser-sync')
     )
 );
