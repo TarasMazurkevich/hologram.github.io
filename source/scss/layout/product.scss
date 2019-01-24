@@ -80,6 +80,7 @@
 		overflow: hidden;
 		display: flex;
 		flex-direction: column;
+		justify-content: space-between;
 		align-items: center;
 
 		margin-top: 1rem;
@@ -162,23 +163,39 @@
 
 .buy {
 	position: fixed;
-	top: 0;
-	left: 0;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
 	overflow-y: scroll;
-
-	width: 100vw;
-	height: 100vh;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
 
 	background-color: rgba(0,0,0, .9);
 	z-index: 100000;
 
-	&__header {
+	@media screen and (min-width: 768px) {
+		overflow-y: hidden;
+	}
+
+	&__wrap {
 		display: flex;
 		flex-direction: column;
+
+		width: 100%;
+		height: 140%;
+		overflow-y: scroll;
+
+		@media screen and (min-width: 768px) {
+			justify-content: center;
+			align-items: center;
+			overflow-y: hidden;
+			height: 100%;
+		}
+	}
+
+	&__header {
+		display: flex;
+		flex-direction: row-reverse;
+		justify-content: space-between;
 		align-items: flex-end;
 		padding: {
 			right: 5%;
@@ -187,6 +204,8 @@
 		width: 100%;
 
 		@media screen and (min-width: 768px) {
+			flex-direction: column;
+			justify-content: flex-start;
 			align-items: center;
 		}
 	}
@@ -286,14 +305,20 @@
 
 	&__row {
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
+		justify-content: space-between;
+
+		padding: {
+			right: 2%;
+			left: 2%;
+		}
 
 		@media screen and (min-width: 768px) {
 			@include f-reg(1.3rem);
 			flex-direction: row;
-			justify-content: space-between;
 			align-items: center;
 			width: 100%;
+			padding: 0;
 		}
 
 		&:not(:first-of-type) {
@@ -301,6 +326,11 @@
 			@media screen and (min-width: 768px) {
 				margin-top: 2rem;
 			}
+		}
+
+		span {
+			color: red;
+			@include f-reg(1.3rem);
 		}
 
 		input {
@@ -330,12 +360,16 @@
 	}
 
 	&_submit {
-		@include btn(100%, auto, 1.5rem);
-		margin-top: 1rem;
+		@include btn(80%, auto, 1.5rem);
+		margin-top: 2rem;
+		margin-left: 50%;
+		transform: translateX(-50%);
 
 		@media screen and (min-width: 768px) {
 			align-self: flex-end;
 			margin-top: 3rem;
+			margin-left: 0;
+			transform: translateX(0);
 			width: 15rem;
 		}
 	}

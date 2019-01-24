@@ -8,7 +8,7 @@
 
 	$msg = "Имя : " . $name . "\n" . "Телефон : " . $phone . "\n" . "Почта : " . $email . "\n" . "Название товара : " . $title . "\n" . "Цена : " . $price;
 
-	if(mail("tartitan1999@gmail.com", "Заявка с сайта", $msg, "From: tartitan1999@gmail.com")) {
+	if(mail("hologramfuture@gmail.com", "Заявка с сайта", $msg, "From: tartitan1999@gmail.com")) {
 		echo $msg;
 	} else {
 		echo "при отправке сообщения возникли ошибки";
