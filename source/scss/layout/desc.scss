@@ -41,6 +41,7 @@
 		&:nth-of-type(1) {
 			@media screen and (min-width: 768px) {
 				border-image: linear-gradient(to bottom right, rgba(186, 0, 255, .4) 0%, rgba(0, 196, 255, .4) 80%, rgba(0, 255, 196, .4) 100%);
+				border-image-slice: 1;
 				transform: translate(2.4%, -5%);
 			}
 		}
@@ -48,6 +49,7 @@
 		&:nth-of-type(2) {
 			@media screen and (min-width: 768px) {
 				border-image: linear-gradient(to bottom right, rgba(186, 0, 255, .6) 0%, rgba(0, 196, 255, .6) 80%, rgba(0, 255, 196, .6) 100%);
+				border-image-slice: 1;
 				transform: translate(1.2%, -2.5%);
 			}
 		}

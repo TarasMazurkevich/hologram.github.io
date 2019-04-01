@@ -75,6 +75,25 @@
 			@include f-med(1.3rem);
 			letter-spacing: .1rem;
 		}
+
+		a {
+			display: block;
+			margin-bottom: .5rem;
+
+			color: $white;
+			@include f-med(1rem);
+
+			@media screen and (min-width: 768px) {
+				margin-bottom: 0;
+				@include f-med(1.2rem);
+			}
+
+			@media screen and (min-width: 1200px) {
+				display: inline-block;
+				margin-left: 2rem;
+				@include f-med(1.5rem);
+			}
+		}
 	}
 
 	// TOP__ARTICLE
